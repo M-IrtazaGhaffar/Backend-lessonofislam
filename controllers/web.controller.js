@@ -19,6 +19,60 @@ const getAllDuas = async (req, res) => {
 }
 
 const getDuaDetails = async (req, res) => {
+    // connection.query(`SELECT * FROM duas WHERE ID = ${req.body.duaid}`, (err, result) => {
+    //     if (err)
+    //         res.
+    //             json({
+    //                 message: 'Some Error Occured'
+    //             })
+    //             .status(500)
+    //     else {
+    //         let dua = result;
+    //         connection.query(`SELECT * FROM duaspoints WHERE DID = ${req.body.duaid}`, (err, result) => {
+    //             if (err)
+    //                 res.
+    //                     json({
+    //                         message: 'Some Error Occured'
+    //                     })
+    //                     .status(500)
+    //             else
+    //                 res.
+    //                     json({
+    //                         dua: dua,
+    //                         data: result
+    //                     })
+    //                     .status(200)
+    //         })
+    //     }
+    // })
+
+    // connection.query(`SELECT * FROM duaspoints WHERE DID = ${req.body.duaid}`, (err, result) => {
+    //     if (err)
+    //         res.
+    //             json({
+    //                 message: 'Some Error Occured'
+    //             })
+    //             .status(500)
+    //     else
+    //         res.
+    //             json({
+    //                 data: result
+    //             })
+    //             .status(200)
+    // })
+
+    const r1 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM duas WHERE ID = ${req.body.duaid}`, (err, result) => {
+            if (err)
+                res.
+                    json({
+                        message: 'Some Error Occured'
+                    })
+                    .status(500)
+            else resolve(result)
+        })
+    })
+
     connection.query(`SELECT * FROM duaspoints WHERE DID = ${req.body.duaid}`, (err, result) => {
         if (err)
             res.
@@ -29,6 +83,7 @@ const getDuaDetails = async (req, res) => {
         else
             res.
                 json({
+                    dua: r1[0],
                     data: result
                 })
                 .status(200)
