@@ -62,7 +62,7 @@ const getDuaDetails = async (req, res) => {
     // })
 
     const r1 = await new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM duas WHERE ID = ${req.body.duaid}`, (err, result) => {
+        connection.query(`SELECT * FROM duas WHERE ID = ${req.body.id}`, (err, result) => {
             if (err)
                 res.
                     json({
@@ -73,7 +73,7 @@ const getDuaDetails = async (req, res) => {
         })
     })
 
-    connection.query(`SELECT * FROM duaspoints WHERE DID = ${req.body.duaid}`, (err, result) => {
+    connection.query(`SELECT * FROM duaspoints WHERE DID = ${req.body.id}`, (err, result) => {
         if (err)
             res.
                 json({
@@ -290,7 +290,19 @@ const getAllZikr = async (req, res) => {
 }
 
 const getZikrDetails = async (req, res) => {
-    connection.query(`SELECT * FROM zikrpoints WHERE ZID = ${req.body.zikrid}`, (err, result) => {
+    const r1 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM zikr WHERE ID = ${req.body.id}`, (err, result) => {
+            if (err)
+                res.
+                    json({
+                        message: 'Some Error Occured'
+                    })
+                    .status(500)
+            else resolve(result)
+        })
+    })
+
+    connection.query(`SELECT * FROM zikrpoints WHERE ZID = ${req.body.id}`, (err, result) => {
         if (err)
             res.
                 json({
@@ -300,6 +312,7 @@ const getZikrDetails = async (req, res) => {
         else
             res.
                 json({
+                    dua: r1[0],
                     data: result
                 })
                 .status(200)
