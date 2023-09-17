@@ -385,7 +385,7 @@ const getNamesDetails = async (req, res) => {
         else
             res.
                 json({
-                    data: result
+                    data: result[0]
                 })
                 .status(200)
     })
