@@ -17,5 +17,9 @@ server.use|(bodyParser.json())
 // Routers
 server.use('/web', webRouter)
 
+server.get('/', (res, res) => {
+    res.json('Hello')
+})
+
 // Listening
 server.listen(process.env.PORT, () => console.log(`Server listening on port :: ${process.env.PORT}!`))
