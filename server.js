@@ -11,14 +11,13 @@ server.use(cors({
     "origin": "*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
-server.use(bodyParser.urlencoded({ extended: true }))
-server.use|(bodyParser.json())
+server.use(express.json())
 
 // Routers
 server.use('/web', webRouter)
 
-server.get('/', (res, res) => {
-    res.json('Hello')
+server.get('/', (req, res) => {
+    res.json('Hello World!')
 })
 
 // Listening
