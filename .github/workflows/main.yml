@@ -19,5 +19,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /api-lessonofislam.ittidevelops.com/  # Path on your cPanel server
           local-dir: ./  # Path to your local repository
-          remote-dir: /api-lessonofislam.ittidevelops.com/  # Path on your cPanel server
