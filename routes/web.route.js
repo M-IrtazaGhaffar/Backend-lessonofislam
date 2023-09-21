@@ -19,7 +19,8 @@ const {
     getNamesDetails,
     getNamesSearch,
     getAllNames,
-    getNamesRecent
+    getNamesRecent,
+    contact
 } = require('../controllers/web.controller')
 const webRouter = express.Router()
 
@@ -56,6 +57,8 @@ webRouter
     // Names
     .post('/getNamesDetails', getNamesDetails)
     .post('/getNamesSearch', getNamesSearch)
+    // Contact
+    .post('/contact', contact)
 
 
 module.exports = {

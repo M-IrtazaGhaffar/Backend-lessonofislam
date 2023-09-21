@@ -387,6 +387,26 @@ const getNamesRecent = async (req, res) => {
     })
 }
 
+// Contact
+
+const contact = async (req, res) => {
+    connection.query(`INSERT INTO contact (Name, Email, Message) VALUES ('${req.body.name}', '${req.body.email}', '${req.body.message}')`, (err, result) => {
+        if (err)
+            res.
+                json({
+                    message: 'Some Error Occured',
+                    error: err
+                })
+                .status(500)
+        else
+            res.
+                json({
+                    data: 'Form Submitted'
+                })
+                .status(200)
+    })
+}
+
 module.exports = {
     getAllDuas,
     getDuaDetails,
@@ -407,5 +427,6 @@ module.exports = {
     getNamesDetails,
     getNamesRecent,
     getAllNames,
-    getNamesSearch
+    getNamesSearch,
+    contact
 }
