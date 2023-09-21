@@ -19,48 +19,6 @@ const getAllDuas = async (req, res) => {
 }
 
 const getDuaDetails = async (req, res) => {
-    // connection.query(`SELECT * FROM duas WHERE ID = ${req.body.duaid}`, (err, result) => {
-    //     if (err)
-    //         res.
-    //             json({
-    //                 message: 'Some Error Occured'
-    //             })
-    //             .status(500)
-    //     else {
-    //         let dua = result;
-    //         connection.query(`SELECT * FROM duaspoints WHERE DID = ${req.body.duaid}`, (err, result) => {
-    //             if (err)
-    //                 res.
-    //                     json({
-    //                         message: 'Some Error Occured'
-    //                     })
-    //                     .status(500)
-    //             else
-    //                 res.
-    //                     json({
-    //                         dua: dua,
-    //                         data: result
-    //                     })
-    //                     .status(200)
-    //         })
-    //     }
-    // })
-
-    // connection.query(`SELECT * FROM duaspoints WHERE DID = ${req.body.duaid}`, (err, result) => {
-    //     if (err)
-    //         res.
-    //             json({
-    //                 message: 'Some Error Occured'
-    //             })
-    //             .status(500)
-    //     else
-    //         res.
-    //             json({
-    //                 data: result
-    //             })
-    //             .status(200)
-    // })
-
     const r1 = await new Promise((resolve, reject) => {
         connection.query(`SELECT * FROM duas WHERE ID = ${req.body.id}`, (err, result) => {
             if (err)
@@ -146,7 +104,7 @@ const getAllStories = async (req, res) => {
 }
 
 const getStoryDetails = async (req, res) => {
-    connection.query(`SELECT * FROM stories WHERE ID = ${req.body.storyid}`, (err, result) => {
+    connection.query(`SELECT * FROM stories WHERE ID = ${req.body.id}`, (err, result) => {
         if (err)
             res.
                 json({
@@ -218,7 +176,7 @@ const getAllBlogs = async (req, res) => {
 }
 
 const getBlogDetails = async (req, res) => {
-    connection.query(`SELECT * FROM blogs WHERE ID = ${req.body.blogid}`, (err, result) => {
+    connection.query(`SELECT * FROM blogs WHERE ID = ${req.body.id}`, (err, result) => {
         if (err)
             res.
                 json({
@@ -375,7 +333,7 @@ const getAllNames = async (req, res) => {
 }
 
 const getNamesDetails = async (req, res) => {
-    connection.query(`SELECT * FROM namesofallah WHERE ID = ${req.body.nameid}`, (err, result) => {
+    connection.query(`SELECT * FROM namesofallah WHERE ID = ${req.body.id}`, (err, result) => {
         if (err)
             res.
                 json({
