@@ -87,7 +87,8 @@ const getDuaRecent = async (req, res) => {
 // Stories
 
 const getAllStories = async (req, res) => {
-    connection.query(`SELECT * FROM stories`, (err, result) => {
+    connection.query(`SELECT *, tags.Keyword FROM stories JOIN tags ON tags.ID = stories.TID;
+    `, (err, result) => {
         if (err)
             res.
                 json({
@@ -139,7 +140,7 @@ const getStorySearch = async (req, res) => {
 }
 
 const getStoryRecent = async (req, res) => {
-    connection.query(`SELECT * FROM stories ORDER BY ID DESC LIMIT 5`, (err, result) => {
+    connection.query(`SELECT *, tags.Keyword FROM stories JOIN tags ON tags.ID = stories.TID ORDER BY ID DESC LIMIT 5`, (err, result) => {
         if (err)
             res.
                 json({
@@ -159,7 +160,8 @@ const getStoryRecent = async (req, res) => {
 //Blogs
 
 const getAllBlogs = async (req, res) => {
-    connection.query(`SELECT * FROM blogs`, (err, result) => {
+    connection.query(`SELECT *, tags.Keyword FROM blogs JOIN tags ON tags.ID = blogs.TID;
+    `, (err, result) => {
         if (err)
             res.
                 json({
@@ -211,7 +213,7 @@ const getBlogSearch = async (req, res) => {
 }
 
 const getBlogRecent = async (req, res) => {
-    connection.query(`SELECT * FROM blogs ORDER BY ID DESC LIMIT 5`, (err, result) => {
+    connection.query(`SELECT *, tags.Keyword FROM blogs JOIN tags ON tags.ID = blogs.TID ORDER BY ID DESC LIMIT 5`, (err, result) => {
         if (err)
             res.
                 json({
