@@ -17,7 +17,7 @@ server.use(express.json())
 server.use('/web', webRouter)
 
 server.get('/', (req, res) => {
-    res.json('Hello World!')
+    res.json('Server Working!')
 })
 
 // Listening
