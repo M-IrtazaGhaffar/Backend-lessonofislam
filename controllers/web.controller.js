@@ -213,7 +213,7 @@ const getBlogSearch = async (req, res) => {
 }
 
 const getBlogRecent = async (req, res) => {
-    connection.query(`SELECT *, tags.Keyword FROM blogs JOIN tags ON tags.ID = blogs.TID ORDER BY ID DESC LIMIT 5`, (err, result) => {
+    connection.query(`SELECT *, tags.Keyword FROM blogs JOIN tags ON tags.ID = blogs.TID ORDER BY ID DESC LIMIT 3`, (err, result) => {
         if (err)
             res.
                 json({
