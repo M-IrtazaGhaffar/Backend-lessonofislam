@@ -8,10 +8,12 @@ const {
     getBlogDetails,
     getDuaSearch,
     getStorySearch,
+    getStoryHome,
     getBlogSearch,
     getDuaRecent,
     getBlogRecent,
     getStoryRecent,
+    getBlogsHome,
     getAllZikr,
     getZikrRecent,
     getZikrSearch,
@@ -32,9 +34,11 @@ webRouter
     // Blogs
     .get('/getAllBlogs', getAllBlogs)
     .get('/getBlogRecent', getBlogRecent)
+    .get('/getBlogsHome', getBlogsHome)
     // Stories
     .get('/getAllStories', getAllStories)
     .get('/getStoryRecent', getStoryRecent)
+    .get('/getStoryHome', getStoryHome)
     // Zikr
     .get('/getAllZikr', getAllZikr)
     .get('/getZikrRecent', getZikrRecent)

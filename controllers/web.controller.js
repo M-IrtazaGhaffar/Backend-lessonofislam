@@ -157,59 +157,59 @@ const getStoryRecent = async (req, res) => {
     })
 }
 
-// const getStoryReverted = async (req, res) => {
-//     connection.query(`SELECT *, tags.Keyword FROM stories JOIN tags ON tags.ID = stories.TID ORDER BY ID DESC LIMIT 3`, (err, result) => {
-//         if (err)
-//             res.
-//                 json({
-//                     message: 'Some Error Occured',
-//                     error: err
-//                 })
-//                 .status(500)
-//         else
-//             res.
-//                 json({
-//                     data: result
-//                 })
-//                 .status(200)
-//     })
-// }
-
-// const getStorySahabas = async (req, res) => {
-//     connection.query(`SELECT *, tags.Keyword FROM stories JOIN tags ON tags.ID = stories.TID ORDER BY ID DESC LIMIT 3`, (err, result) => {
-//         if (err)
-//             res.
-//                 json({
-//                     message: 'Some Error Occured',
-//                     error: err
-//                 })
-//                 .status(500)
-//         else
-//             res.
-//                 json({
-//                     data: result
-//                 })
-//                 .status(200)
-//     })
-// }
-
-// const getStoryProphets = async (req, res) => {
-//     connection.query(`SELECT *, tags.Keyword FROM stories JOIN tags ON tags.ID = stories.TID ORDER BY ID DESC LIMIT 3`, (err, result) => {
-//         if (err)
-//             res.
-//                 json({
-//                     message: 'Some Error Occured',
-//                     error: err
-//                 })
-//                 .status(500)
-//         else
-//             res.
-//                 json({
-//                     data: result
-//                 })
-//                 .status(200)
-//     })
-// }
+const getStoryHome = async (req, res) => {
+    const r1 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM stories WHERE TID = 2`, (err, result) => {
+            if (err)
+                res.
+                    json({
+                        message: 'Some Error Occured',
+                        error: err
+                    })
+                    .status(500)
+            else resolve(result)
+        })
+    })
+    const r2 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM stories WHERE TID = 3`, (err, result) => {
+            if (err)
+                res.
+                    json({
+                        message: 'Some Error Occured',
+                        error: err
+                    })
+                    .status(500)
+            else resolve(result)
+        })
+    })
+    const r3 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM stories WHERE TID = 6`, (err, result) => {
+            if (err)
+                res
+                    .status(500)
+                    .json({
+                        message: 'Some Error Occured',
+                        error: err
+                    })
+            else resolve(result)
+        })
+    })
+    res
+        .status(200)
+        .json({
+            "data": [
+                {
+                    'Revertness': r1
+                },
+                {
+                    'Prophets': r2
+                },
+                {
+                    'Sahabas': r3
+                }
+            ]
+        })
+}
 
 //Blogs
 
@@ -282,6 +282,60 @@ const getBlogRecent = async (req, res) => {
                     data: result
                 })
     })
+}
+
+const getBlogsHome = async (req, res) => {
+    const r1 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM blogs WHERE TID = 2`, (err, result) => {
+            if (err)
+                res.
+                    json({
+                        message: 'Some Error Occured',
+                        error: err
+                    })
+                    .status(500)
+            else resolve(result)
+        })
+    })
+    const r2 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM blogs WHERE TID = 3`, (err, result) => {
+            if (err)
+                res.
+                    json({
+                        message: 'Some Error Occured',
+                        error: err
+                    })
+                    .status(500)
+            else resolve(result)
+        })
+    })
+    const r3 = await new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM blogs WHERE TID = 6`, (err, result) => {
+            if (err)
+                res
+                    .status(500)
+                    .json({
+                        message: 'Some Error Occured',
+                        error: err
+                    })
+            else resolve(result)
+        })
+    })
+    res
+        .status(200)
+        .json({
+            "data": [
+                {
+                    'Revertness': r1
+                },
+                {
+                    'Prophets': r2
+                },
+                {
+                    'Sahabas': r3
+                }
+            ]
+        })
 }
 
 // Zikr
@@ -471,9 +525,11 @@ module.exports = {
     getDuaSearch,
     getStorySearch,
     getBlogSearch,
+    getBlogsHome,
     getDuaRecent,
     getBlogRecent,
     getStoryRecent,
+    getStoryHome,
     getZikrDetails,
     getZikrRecent,
     getZikrSearch,
