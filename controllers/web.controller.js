@@ -521,6 +521,20 @@ const contact = async (req, res) => {
     })
 }
 
+// Donate Us
+const donate = async (req, res) => {
+    try {
+        const { } = req.body;
+        res
+            .status(200)
+            .json("Payment Verified!")
+    } catch (error) {
+        res
+            .status(500)
+            .json("Some Error Ocurred")
+    }
+}
+
 module.exports = {
     getAllDuas,
     getDuaDetails,
@@ -544,5 +558,6 @@ module.exports = {
     getNamesRecent,
     getAllNames,
     getNamesSearch,
-    contact
+    contact,
+    donate
 }
