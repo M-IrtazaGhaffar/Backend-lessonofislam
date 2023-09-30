@@ -199,13 +199,16 @@ const getStoryHome = async (req, res) => {
         .json({
             "data": [
                 {
-                    'Revertness': r1
+                    'name': 'Revertness',
+                    'dataSet': r1
                 },
                 {
-                    'Prophets': r2
+                    'name': 'Prophets',
+                    'dataSet': r2
                 },
                 {
-                    'Sahabas': r3
+                    'name': 'Sahabas',
+                    'dataSet': r3
                 }
             ]
         })
@@ -326,13 +329,16 @@ const getBlogsHome = async (req, res) => {
         .json({
             "data": [
                 {
-                    'Revertness': r1
+                    'name': 'Revertness',
+                    'dataSet': r1
                 },
                 {
-                    'Prophets': r2
+                    'name': 'Prophets',
+                    'dataSet': r2
                 },
                 {
-                    'Sahabas': r3
+                    'name': 'Sahabas',
+                    'dataSet': r3
                 }
             ]
         })
