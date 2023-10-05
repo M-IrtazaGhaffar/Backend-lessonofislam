@@ -5,7 +5,6 @@ const cors = require('cors');
 const { webRouter } = require('./routes/web.route');
 const { writerRuouter } = require('./routes/writer.route');
 const { adminRuouter } = require('./routes/admin.route');
-const { authJSON } = require('./middlewares/auth');
 require('dotenv').config()
 
 // Middlewares
@@ -18,7 +17,7 @@ server.use(express.json())
 // Routers
 server.use('/web', webRouter)
 server.use('/writer', writerRuouter)
-server.use('/admin', authJSON,adminRuouter)
+server.use('/admin', adminRuouter)
 
 // Testing Route
 server.get('/', (req, res) => {
