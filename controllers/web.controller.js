@@ -115,7 +115,7 @@ const getStoryDetails = async (req, res) => {
             res
                 .status(200)
                 .json({
-                    data: result
+                    data: result[0]
                 })
     })
 }
@@ -244,7 +244,7 @@ const getBlogDetails = async (req, res) => {
             res
                 .status(200)
                 .json({
-                    data: result
+                    data: result[0]
                 })
     })
 }
