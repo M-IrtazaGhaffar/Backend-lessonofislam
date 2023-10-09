@@ -1,8 +1,9 @@
 ---> writer
-
 login
 create
 edit
 delete
 fetchBlog
 fetchAll
+
+---> Admin

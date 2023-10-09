@@ -1,5 +1,6 @@
 const express = require('express')
-const { register, login, deleteBlog } = require('../controllers/writer.controller')
+const { register, login, deleteBlog, createBlog, fetchBlog, fetchAllBlog } = require('../controllers/writer.controller')
+const { authJSON } = require('../middlewares/auth')
 const writerRuouter = express.Router()
 
 writerRuouter
@@ -7,6 +8,9 @@ writerRuouter
     // POST
     .post('/register', register)
     .post('/login', login)
+    .post('/createBlog', authJSON, createBlog)
+    .post('/fetchBlog', authJSON, fetchBlog)
+    .post('/fetchAllBlog', authJSON, fetchAllBlog)
     // Delete
     .delete('/delete', deleteBlog)
 

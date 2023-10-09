@@ -1,11 +1,13 @@
 const { checkToken, generateToken } = require("./token")
 
 const authJSON = async (req, res, next) => {
-    const token = req.token 
+    const token = req.token || ''
     if (await checkToken(token)) next()
     else res
         .status(401)
-        .json("UnAuthorized!")
+        .json({
+            message: "UnAuthorized!"
+        })
 }
 
 module.exports = {

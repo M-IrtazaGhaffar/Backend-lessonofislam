@@ -39,6 +39,7 @@ const register = async (req, res) => {
                 })
                 .status(200)
     })
+    // Send mail using NodeMailer to confirm the registration
 }
 
 const login = async (req, res) => {
@@ -72,6 +73,25 @@ const login = async (req, res) => {
             })
 }
 
+const createBlog = async (req, res) => {
+    const { uid, title, image, desc, detail, tid } = req.body;
+    connection.query(`INSERT INTO blogs (UID, Title, Image, Desc, Detail, TID) VALUES ('${uid}', '${title}', '${image}', '${desc}', '${detail}', '${tid}')`, (err, result) => {
+        if (err)
+            res
+                .status(500)
+                .json({
+                    message: 'Some Error Occured',
+                    error: err
+                })
+        else
+            res
+                .status(200)
+                .json({
+                    data: 'Data Inserted Successfully!',
+                })
+    })
+}
+
 const deleteBlog = async (req, res) => {
     const { id } = req.body;
     connection.query(`DELETE FROM blogs WHERE blogs.ID = '${id}'`, (err, result) => {
@@ -91,8 +111,69 @@ const deleteBlog = async (req, res) => {
     })
 }
 
+const editBlog = async (req, res) => {
+    const { id, title, image, desc, detail, tid } = req.body;
+    connection.query(`UPDATE blogs SET Title = '${title}', Image = '${image}', Desc = '${desc}', Detail = '${detail}', TID = '${tid}' WHERE blogs.ID = ${id}`, (err, result) => {
+        if (err)
+            res
+                .status(500)
+                .json({
+                    message: 'Some Error Occured',
+                    error: err
+                })
+        else
+            res
+                .status(200)
+                .json({
+                    data: 'Edit Saved Successfully!',
+                })
+    })
+}
+
+const fetchBlog = async (req, res) => {
+    const { id } = req.body;
+    connection.query(`SELECT * FROM blogs WHERE ID = ${id}`, (err, result) => {
+        if (err)
+            res
+                .status(500)
+                .json({
+                    message: 'Some Error Occured',
+                    error: err
+                })
+        else
+            res
+                .status(200)
+                .json({
+                    data: result[0],
+                })
+    })
+}
+
+const fetchAllBlog = async (req, res) => {
+    const { uid } = req.body;
+    connection.query(`SELECT * FROM blogs WHERE UID = ${uid}`, (err, result) => {
+        if (err)
+            res
+                .status(500)
+                .json({
+                    message: 'Some Error Occured',
+                    error: err
+                })
+        else
+            res
+                .status(200)
+                .json({
+                    data: result,
+                })
+    })
+}
+
 module.exports = {
     register,
     login,
-    deleteBlog
+    deleteBlog,
+    createBlog,
+    editBlog,
+    fetchBlog,
+    fetchAllBlog
 }
