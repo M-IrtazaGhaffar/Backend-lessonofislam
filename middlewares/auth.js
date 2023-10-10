@@ -1,7 +1,7 @@
-const { checkToken, generateToken } = require("./token")
+const { checkToken } = require("./token")
 
 const authJSON = async (req, res, next) => {
-    const token = req.token || ''
+    const token = req.body.token || ''
     if (await checkToken(token)) next()
     else res
         .status(401)

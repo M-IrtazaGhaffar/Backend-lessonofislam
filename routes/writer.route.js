@@ -4,14 +4,14 @@ const { authJSON } = require('../middlewares/auth')
 const writerRuouter = express.Router()
 
 writerRuouter
-    // GET
-    // POST
+    // --- GET ---
+    // --- POST ---
     .post('/register', register)
     .post('/login', login)
     .post('/createBlog', authJSON, createBlog)
     .post('/fetchBlog', authJSON, fetchBlog)
     .post('/fetchAllBlog', authJSON, fetchAllBlog)
-    // Delete
+    // --- Delete ---
     .delete('/delete', deleteBlog)
 
 module.exports = {
