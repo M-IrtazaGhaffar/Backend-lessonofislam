@@ -11,8 +11,7 @@ writerRuouter
     .post('/createBlog', authJSON, createBlog)
     .post('/fetchBlog', authJSON, fetchBlog)
     .post('/fetchAllBlog', authJSON, fetchAllBlog)
-    // --- Delete ---
-    .delete('/delete', authJSON, deleteBlog)
+    .post('/deleteBlog', authJSON, deleteBlog)
 
 module.exports = {
     writerRuouter
