@@ -12,7 +12,7 @@ writerRuouter
     .post('/fetchBlog', authJSON, fetchBlog)
     .post('/fetchAllBlog', authJSON, fetchAllBlog)
     // --- Delete ---
-    .delete('/delete', deleteBlog)
+    .delete('/delete', authJSON, deleteBlog)
 
 module.exports = {
     writerRuouter
