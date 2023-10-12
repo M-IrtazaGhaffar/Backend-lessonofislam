@@ -152,7 +152,7 @@ const fetchBlog = async (req, res) => {
 
 const fetchAllBlog = async (req, res) => {
     const { uid } = req.body;
-    connection.query(`SELECT * FROM blogs WHERE UID = ${uid}`, (err, result) => {
+    connection.query(`SELECT blogs.ID, blogs.Title, blogs.Date FROM blogs WHERE UID = ${uid}`, (err, result) => {
         if (err)
             res
                 .status(500)
