@@ -169,6 +169,24 @@ const fetchAllBlog = async (req, res) => {
     })
 }
 
+const fetchAllTags = async (req, res) => {
+    connection.query(`SELECT * FROM tags`, (err, result) => {
+        if (err)
+            res
+                .status(500)
+                .json({
+                    message: 'Some Error Occured',
+                    error: err
+                })
+        else
+            res
+                .status(200)
+                .json({
+                    data: result,
+                })
+    })
+}
+
 module.exports = {
     register,
     login,
@@ -176,5 +194,6 @@ module.exports = {
     createBlog,
     editBlog,
     fetchBlog,
-    fetchAllBlog
+    fetchAllBlog,
+    fetchAllTags
 }
