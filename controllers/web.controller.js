@@ -87,7 +87,7 @@ const getDuaRecent = async (req, res) => {
 // Stories
 
 const getAllStories = async (req, res) => {
-    connection.query(`SELECT stories.ID, stories.Date, stories.Title, stories.Image, stories.Desc, tags.Keyword FROM stories JOIN tags ON tags.ID = stories.TID`, (err, result) => {
+    connection.query(`SELECT stories.ID, stories.Date, stories.Title, stories.Image, stories.Descr, tags.Keyword FROM stories JOIN tags ON tags.ID = stories.TID`, (err, result) => {
         if (err)
             res
                 .status(500)
@@ -216,7 +216,7 @@ const getStoryHome = async (req, res) => {
 //Blogs
 
 const getAllBlogs = async (req, res) => {
-    connection.query(`SELECT blogs.ID, blogs.Date, blogs.Title, blogs.Image, blogs.Desc, tags.Keyword FROM blogs JOIN tags ON tags.ID = blogs.TID`, (err, result) => {
+    connection.query(`SELECT blogs.ID, blogs.Date, blogs.Title, blogs.Image, blogs.Descr, tags.Keyword FROM blogs JOIN tags ON tags.ID = blogs.TID`, (err, result) => {
         if (err)
             res
                 .status(500)
