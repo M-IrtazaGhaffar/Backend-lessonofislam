@@ -77,7 +77,7 @@ const login = async (req, res) => {
 const createBlog = async (req, res) => {
     const { uid, title, image, descr, detail, tid } = req.body;
     console.log(req.body);
-    connection.query(`INSERT INTO blogs (UID, Title, Image, Descr, Detail, TID) VALUES ('${uid}', '${title}', '${image}', '${descr}', '${detail}', '${tid}')`, (err, result) => {
+    connection.query(`INSERT INTO blogs (UID, Title, Image, Descr, Detail, TID) VALUES (?, ?, ?, ?, ?, ?)`, [uid, title, image, descr, detail, tid], (err, result) => {
         if (err)
             res
                 .status(500)
@@ -114,8 +114,9 @@ const deleteBlog = async (req, res) => {
 }
 
 const editBlog = async (req, res) => {
-    const { id, title, image, descr, detail, tid } = req.body;
-    connection.query(`UPDATE blogs SET Title = '${title}', Image = '${image}', Descr = '${descr}', Detail = '${detail}', TID = '${tid}' WHERE blogs.ID = ${id}`, (err, result) => {
+    const { id, title, descr, detail } = req.body;
+    console.log(req.body);
+    connection.query(`UPDATE blogs SET Title = ?, Descr = ?, Detail = ? WHERE blogs.ID = ${id}`, [title, descr, detail], (err, result) => {
         if (err)
             res
                 .status(500)
