@@ -76,7 +76,8 @@ const login = async (req, res) => {
 
 const createBlog = async (req, res) => {
     const { uid, title, image, desc, detail, tid } = req.body;
-    connection.query(`INSERT INTO blogs (UID, Title, Image, Desc, Detail, TID) VALUES ('${uid}', '${title}', '${image}', '${desc}', '${detail}', '${tid}')`, (err, result) => {
+    console.log(req.body);
+    connection.query(`INSERT INTO blogs (UID, Title, Image, \`Desc\`, Detail, TID) VALUES ('${uid}', '${title}', '${image}', '${desc}', '${detail}', '${tid}')`, (err, result) => {
         if (err)
             res
                 .status(500)
