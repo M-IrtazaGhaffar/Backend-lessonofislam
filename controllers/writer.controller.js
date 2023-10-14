@@ -1,4 +1,5 @@
 const { connection } = require("../database/config")
+const { sendMail } = require("../mail/registerTemplate")
 const { checkHash, generateHash } = require("../middlewares/bcrypt")
 const { generateToken } = require("../middlewares/token")
 
@@ -6,12 +7,12 @@ const register = async (req, res) => {
     const r1 = await new Promise((resolve, reject) => {
         connection.query(`SELECT * FROM users WHERE Email = '${req.body.email}'`, (err, result) => {
             if (err)
-                res.
-                    json({
+                res
+                    .status(500)
+                    .json({
                         message: 'Some Error Occured',
                         error: err
                     })
-                    .status(500)
             else
                 resolve(result)
         })
@@ -24,28 +25,31 @@ const register = async (req, res) => {
             })
         return;
     }
-    connection.query(`INSERT INTO users (Name, Email, Password) VALUES ('${req.body.name}', '${req.body.email}', '${req.body.password}')`, (err, result) => {
+    const hash = await (generateHash(req.body.password))
+    connection.query(`INSERT INTO users (Name, Email, Password) VALUES ('${req.body.name}', '${req.body.email}', '${hash}')`, async (err, result) => {
         if (err)
-            res.
-                json({
+            res
+                .status(500)
+                .json({
                     message: 'Some Error Occured',
                     error: err
                 })
-                .status(500)
-        else
-            res.
-                json({
+        else {
+            console.log(result);
+            await sendMail(req.body.name, req.body.email)
+            res
+                .status(200)
+                .json({
                     data: 'User Registered!'
                 })
-                .status(200)
+        }
     })
-    // Send mail using NodeMailer to confirm the registration
 }
 
 const login = async (req, res) => {
     const { email, password } = req.body
     const r1 = await new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM users WHERE Email = '${email}'`, (err, result) => {
+        connection.query(`SELECT users.ID, users.Email, users.Password FROM users JOIN writers on writers.UID = users.ID WHERE users.Email = '${email}';`, (err, result) => {
             if (err)
                 res
                     .status(500)
@@ -54,10 +58,17 @@ const login = async (req, res) => {
                         error: err
                     })
             else
-                resolve(result[0])
+                resolve(result)
         })
     })
-    if (await checkHash(password, r1.Password)) {
+    if (r1.length === 0) {
+        res
+            .status(401)
+            .json({
+                message: "Your Email is either not approved for writing or your email don't exist!",
+            })
+    }
+    if (await checkHash(password, r1[0].Password)) {
         const token = await generateToken(email)
         res
             .status(200)
