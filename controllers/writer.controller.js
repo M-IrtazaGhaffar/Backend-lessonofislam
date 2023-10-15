@@ -164,6 +164,7 @@ const fetchBlog = async (req, res) => {
 }
 
 const fetchAllBlog = async (req, res) => {
+    console.log(req.body);
     const { uid } = req.body;
     connection.query(`SELECT blogs.ID, blogs.Title, blogs.Date FROM blogs WHERE UID = ${uid}`, (err, result) => {
         if (err)
@@ -200,6 +201,29 @@ const fetchAllTags = async (req, res) => {
     })
 }
 
+const fetchUser = async (req, res) => {
+    const { id } = req.body
+    connection.query(`SELECT * FROM users WHERE users.ID = "${id}";`, (err, result) => {
+        if (err)
+            res
+                .status(500)
+                .json({
+                    message: 'Some Error Occured',
+                    error: err
+                })
+        else
+            res
+                .status(200)
+                .json({
+                    data: result[0],
+                })
+    })
+}
+
+const changePassword = async (req, res) => {
+    res.json("Hello")
+}
+
 module.exports = {
     register,
     login,
@@ -208,5 +232,7 @@ module.exports = {
     editBlog,
     fetchBlog,
     fetchAllBlog,
-    fetchAllTags
+    fetchAllTags,
+    fetchUser,
+    changePassword
 }

@@ -1,5 +1,5 @@
 const express = require('express')
-const { register, login, deleteBlog, createBlog, fetchBlog, fetchAllBlog, fetchAllTags, editBlog } = require('../controllers/writer.controller')
+const { register, login, deleteBlog, createBlog, fetchBlog, fetchAllBlog, fetchAllTags, editBlog, fetchUser, changePassword } = require('../controllers/writer.controller')
 const { authJSON } = require('../middlewares/auth')
 const writerRuouter = express.Router()
 
@@ -15,6 +15,8 @@ writerRuouter
     .post('/fetchAllBlog', authJSON, fetchAllBlog)
     .post('/deleteBlog', authJSON, deleteBlog)
     .post('/editBlog', authJSON, editBlog)
+    .post('/fetchUser', authJSON, fetchUser)
+    .post('/changePassword', authJSON, changePassword)
 
 module.exports = {
     writerRuouter
