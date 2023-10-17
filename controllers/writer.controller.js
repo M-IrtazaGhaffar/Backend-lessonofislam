@@ -47,7 +47,15 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body;
+    if (email === '' || password === '') {
+        res
+            .status(200)
+            .json({
+                data: 'No Email or Password was found!'
+            })
+        return;
+    }
     const r1 = await new Promise((resolve, reject) => {
         connection.query(`SELECT users.ID, users.Email, users.Password FROM users JOIN writers on writers.UID = users.ID WHERE users.Email = '${email}';`, (err, result) => {
             if (err)
