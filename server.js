@@ -13,7 +13,7 @@ server.use(cors({
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
 server.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+server.use(express.urlencoded({ extended: true }))
 
 // Routers
 server.use('/web', webRouter)
