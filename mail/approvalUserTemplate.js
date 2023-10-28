@@ -1,18 +1,18 @@
 const nodemailer = require("nodemailer");
-const handlebars = require('handlebars')
+const handlebars = require("handlebars");
 
 async function sendMailApproval(name, email) {
-    const transporter = nodemailer.createTransport({
-        host: "diablo.hostns.io",
-        port: 465,
-        secure: true,
-        auth: {
-            user: "info@ittidevelops.com",
-            pass: "irtaza@2003",
-        },
-    });
+  const transporter = nodemailer.createTransport({
+    host: "diablo.hostns.io",
+    port: 465,
+    secure: true,
+    auth: {
+      user: "info@ittidevelops.com",
+      pass: "irtaza@2003",
+    },
+  });
 
-    const htmlTemplate = `<!DOCTYPE html>
+  const htmlTemplate = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -59,7 +59,7 @@ async function sendMailApproval(name, email) {
             <p>Dear {{username}}!</p>
             <p>
                 Thanks for your time! We wanted to inform you that this mail was sent just because you wanted to be a Writer for us. We appericate
-                your mindset and feeling honourable to say you that you are now Approved as Writer.
+                your mindset and feeling honourable to say you that you are now Approved as Writer. Your Email and Password was the previous one that you wanted to confirm when filling the form.
                 <br>
                 Here is the link to the dashboard:
                 <br>
@@ -68,30 +68,30 @@ async function sendMailApproval(name, email) {
             </p>
         </section>
     </body>
-    </html>`
+    </html>`;
 
-    try {
-        const template = handlebars.compile(htmlTemplate)
+  try {
+    const template = handlebars.compile(htmlTemplate);
 
-        const replacements = {
-            username: name
-        }
+    const replacements = {
+      username: name,
+    };
 
-        const htmlToSend = template(replacements)
+    const htmlToSend = template(replacements);
 
-        const info = await transporter.sendMail({
-            from: '"LessonOfIslam" <info@ittidevelops.com>',
-            to: `${email}`,
-            subject: "Welcome to LessonOfIslam",
-            html: htmlToSend,
-        });
+    const info = await transporter.sendMail({
+      from: '"LessonOfIslam" <info@ittidevelops.com>',
+      to: `${email}`,
+      subject: "Welcome to LessonOfIslam",
+      html: htmlToSend,
+    });
 
-        return true;
-    } catch (error) {
-        return false
-    }
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 module.exports = {
-    sendMailApproval
-}
+  sendMailApproval,
+};

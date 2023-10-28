@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const handlebars = require("handlebars");
 
-async function sendMailAdminLogin(name, email) {
+async function changePasswordTemplate(name, email, token) {
   const transporter = nodemailer.createTransport({
     host: "diablo.hostns.io",
     port: 465,
@@ -58,7 +58,7 @@ async function sendMailAdminLogin(name, email) {
             </h1>
             <p>Dear {{username}}!</p>
             <p>
-                We noticed a login on your Dashboard from LessonOfIslam. If that wasn't you then please change your password here:
+                You can change your password using this link:
                 <a href="https://dashboard-lessonofislam.vercel.app/changepassword/{{token}}">Change Password</a> 
             </p>
         </section>
@@ -89,5 +89,5 @@ async function sendMailAdminLogin(name, email) {
 }
 
 module.exports = {
-  sendMailAdminLogin,
+  changePasswordTemplate,
 };
