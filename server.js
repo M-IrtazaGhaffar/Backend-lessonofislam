@@ -12,7 +12,7 @@ server.use(cors({
     "origin": "*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
-server.use(express.json())
+server.use(express.json({ limit: '1000mb'}))
 server.use(express.urlencoded({ extended: true }))
 
 // Routers

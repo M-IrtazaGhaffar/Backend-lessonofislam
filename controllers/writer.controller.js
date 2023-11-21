@@ -88,7 +88,6 @@ const login = async (req, res) => {
 
 const createBlog = async (req, res) => {
   const { uid, title, image, descr, detail, tid } = req.body;
-  console.log(req.body);
   connection.query(
     `INSERT INTO blogs (UID, Title, Image, Descr, Detail, TID) VALUES (?, ?, ?, ?, ?, ?)`,
     [uid, title, image, descr, detail, tid],
