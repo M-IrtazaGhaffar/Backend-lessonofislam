@@ -4,7 +4,7 @@ const { sendMailAdminLogin } = require("../mail/loginTemplate");
 const { sendMail } = require("../mail/registerTemplate");
 const { checkHash, generateHash } = require("../middlewares/bcrypt");
 const { generatePassToken } = require("../middlewares/changepassToken");
-const { generateToken } = require("../middlewares/token");
+const { generateToken, decodeToken } = require("../middlewares/token");
 
 const register = async (req, res) => {
   const r1 = await new Promise((resolve, reject) => {
@@ -217,7 +217,7 @@ const changePassword = async (req, res) => {
     });
   const r1 = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT users.ID, users.Email, users.Password FROM users JOIN writers on writers.UID = users.ID WHERE users.Email = '${email}';`,
+      `SELECT users.ID, users.Name, users.Email, users.Password FROM users JOIN writers on writers.UID = users.ID WHERE users.Email = '${email}';`,
       (err, result) => {
         if (err)
           res.status(500).json({
@@ -247,14 +247,15 @@ const changePassword = async (req, res) => {
 };
 
 const updatePassword = async (req, res) => {
-  const { password } = req.body;
-  if (password === "")
+  const { password, token } = req.body;
+  const { email } = await decodeToken(token);
+  if (password === "" || email === "")
     res.status(500).json({
       message: "No data was provided!",
     });
   const hash = await generateHash(password);
   const r1 = await new Promise((resolve, reject) => {
-    connection.query(`!!! TYPE QUERY HERE !!!`, (err, result) => {
+    connection.query(`UPDATE users SET Password = '${hash}' WHERE users.Email = '${email}'`, (err, result) => {
       if (err)
         res.status(500).json({
           message: "Some Error Occured",
@@ -263,6 +264,7 @@ const updatePassword = async (req, res) => {
       else resolve(result);
     });
   });
+  // Send email when the password is changed!
 };
 
 module.exports = {
@@ -276,4 +278,5 @@ module.exports = {
   fetchAllTags,
   fetchUser,
   changePassword,
+  updatePassword
 };

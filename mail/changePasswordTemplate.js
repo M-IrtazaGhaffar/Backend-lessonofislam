@@ -24,6 +24,8 @@ async function changePasswordTemplate(name, email, token) {
         body {
             padding: 10px;
             font-family: 'Poppins', sans-serif;
+            background: white;
+            color: black;
         }
 
         h1 {
@@ -46,6 +48,7 @@ async function changePasswordTemplate(name, email, token) {
         p {
             font-size: 13px;
         }
+
     </style>
     </head>
     <body>
